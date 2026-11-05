@@ -36,7 +36,10 @@ app.use(
       if (!origin) {
         return callback(null, true);
       }
-      if (allowedOrigins.includes(origin)) {
+      if (
+        allowedOrigins.includes(origin) ||
+        (origin.startsWith('https://') && origin.endsWith('.vercel.app'))
+      ) {
         return callback(null, true);
       }
       const corsError = new Error('Cross-Origin Request Blocked: Origin is not permitted.');
