@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Visible accessible focus states (WCAG 2.2 AA) */
+  *:focus-visible {
+    outline: 2px solid #0c87eb;
+    outline-offset: 2px;
+  }
+}
+
+/* Print Stylesheet for Checklist Export & Browser Save as PDF (FR-06) */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  /* Prevent awkward breaks inside items */
+  .avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

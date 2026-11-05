@@ -1,0 +1,20 @@
+{
+  "name": "appointment-prep-root",
+  "version": "1.0.0",
+  "description": "Appointment Prep — Private, responsive web application to prepare for medical visits",
+  "private": true,
+  "scripts": {
+    "server": "npm --prefix server start",
+    "server:dev": "npm --prefix server run dev",
+    "client": "npm --prefix client dev",
+    "client:build": "npm --prefix client build",
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,green\" \"npm run server:dev\" \"npm run client\"",
+    "test:server": "npm --prefix server test",
+    "test:client": "npm --prefix client test",
+    "test": "npm run test:server && npm run test:client",
+    "build": "npm --prefix server install && npm --prefix client install && npm --prefix client run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5"
+  }
+}
