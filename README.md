@@ -2,6 +2,7 @@
 
 > **A private, responsive web application and conversational assistant that empowers patients to organize questions, track self-reported medications, and generate concise, printable clinical checklists for medical appointments.**
 
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white)](https://backendcia2.vercel.app)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-v20%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -10,6 +11,8 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Tests](https://img.shields.io/badge/Tests-81%20Passed-brightgreen?logo=jest&logoColor=white)](https://jestjs.io/)
 [![Security](https://img.shields.io/badge/Security-Hardened%20(HttpOnly%20%2B%20CSRF)-blueviolet)](#-security--privacy-safeguards)
+
+🔗 **Live Production URL:** [https://backendcia2.vercel.app](https://backendcia2.vercel.app)
 
 ---
 
