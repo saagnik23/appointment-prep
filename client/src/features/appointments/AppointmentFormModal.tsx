@@ -31,7 +31,6 @@ export const AppointmentFormModal: React.FC<AppointmentFormModalProps> = ({
 
   useEffect(() => {
     if (initialData) {
-      // Format scheduledAt to YYYY-MM-DDTHH:mm for datetime-local input
       let formattedDate = '';
       if (initialData.scheduledAt) {
         const d = new Date(initialData.scheduledAt);
@@ -91,16 +90,16 @@ export const AppointmentFormModal: React.FC<AppointmentFormModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={title} maxWidth="max-w-xl">
       {error && (
-        <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-800 text-sm flex items-start space-x-2">
-          <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-          <span>{error}</span>
+        <div className="mb-4 p-3 rounded-lg bg-error-soft border border-error-border text-error text-xs flex items-start space-x-2">
+          <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+          <span className="font-medium">{error}</span>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="apt-title" className="block text-sm font-semibold text-slate-700 mb-1">
-            Appointment Title <span className="text-red-500">*</span>
+          <label htmlFor="apt-title" className="block text-xs font-bold text-main-text uppercase tracking-wider mb-1.5">
+            Appointment Title <span className="text-error">*</span>
           </label>
           <input
             id="apt-title"
@@ -109,56 +108,56 @@ export const AppointmentFormModal: React.FC<AppointmentFormModalProps> = ({
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             placeholder="e.g., Annual Cardiology Review, Dental Cleaning"
-            className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-slate-900 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm transition-all"
+            className="w-full px-4 py-2.5 rounded-2xl border border-border text-main-text placeholder-secondary-text/60 focus:ring-2 focus:ring-primary focus:border-primary text-xs transition-all bg-surface hover:border-sage-300"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="apt-provider" className="block text-sm font-semibold text-slate-700 mb-1">
-              Doctor or Clinic Name <span className="text-xs text-slate-400 font-normal">(Optional)</span>
+            <label htmlFor="apt-provider" className="block text-xs font-bold text-main-text uppercase tracking-wider mb-1.5">
+              Doctor or Clinic Name <span className="text-secondary-text font-normal lowercase">(optional)</span>
             </label>
             <input
               id="apt-provider"
               type="text"
               value={formData.providerName}
               onChange={(e) => setFormData({ ...formData, providerName: e.target.value })}
-              placeholder="e.g., Dr. Sarah Smith"
-              className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-slate-900 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm transition-all"
+              placeholder="e.g., Dr. Sarah Hosten"
+              className="w-full px-4 py-2.5 rounded-2xl border border-border text-main-text placeholder-secondary-text/60 focus:ring-2 focus:ring-primary focus:border-primary text-xs transition-all bg-surface hover:border-sage-300"
             />
           </div>
 
           <div>
-            <label htmlFor="apt-date" className="block text-sm font-semibold text-slate-700 mb-1">
-              Date & Time <span className="text-xs text-slate-400 font-normal">(Optional)</span>
+            <label htmlFor="apt-date" className="block text-xs font-bold text-main-text uppercase tracking-wider mb-1.5">
+              Date & Time <span className="text-secondary-text font-normal lowercase">(optional)</span>
             </label>
             <input
               id="apt-date"
               type="datetime-local"
               value={formData.scheduledAt}
               onChange={(e) => setFormData({ ...formData, scheduledAt: e.target.value })}
-              className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-slate-900 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm transition-all"
+              className="w-full px-4 py-2.5 rounded-2xl border border-border text-main-text focus:ring-2 focus:ring-primary focus:border-primary text-xs transition-all bg-surface hover:border-sage-300"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="apt-location" className="block text-sm font-semibold text-slate-700 mb-1">
-              Location / Room <span className="text-xs text-slate-400 font-normal">(Optional)</span>
+            <label htmlFor="apt-location" className="block text-xs font-bold text-main-text uppercase tracking-wider mb-1.5">
+              Location / Room <span className="text-secondary-text font-normal lowercase">(optional)</span>
             </label>
             <input
               id="apt-location"
               type="text"
               value={formData.location}
               onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-              placeholder="e.g., Memorial Hospital, Suite 400"
-              className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-slate-900 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm transition-all"
+              placeholder="e.g., Suite 204, Main Clinic"
+              className="w-full px-4 py-2.5 rounded-2xl border border-border text-main-text placeholder-secondary-text/60 focus:ring-2 focus:ring-primary focus:border-primary text-xs transition-all bg-surface hover:border-sage-300"
             />
           </div>
 
           <div>
-            <label htmlFor="apt-status" className="block text-sm font-semibold text-slate-700 mb-1">
+            <label htmlFor="apt-status" className="block text-xs font-bold text-main-text uppercase tracking-wider mb-1.5">
               Status
             </label>
             <select
@@ -170,7 +169,7 @@ export const AppointmentFormModal: React.FC<AppointmentFormModalProps> = ({
                   status: e.target.value as 'upcoming' | 'completed' | 'cancelled',
                 })
               }
-              className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-slate-900 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm transition-all bg-white"
+              className="w-full px-4 py-2.5 rounded-2xl border border-border text-main-text focus:ring-2 focus:ring-primary focus:border-primary text-xs transition-all bg-surface hover:border-sage-300 cursor-pointer"
             >
               <option value="upcoming">Upcoming</option>
               <option value="completed">Completed</option>
@@ -180,31 +179,31 @@ export const AppointmentFormModal: React.FC<AppointmentFormModalProps> = ({
         </div>
 
         <div>
-          <label htmlFor="apt-notes" className="block text-sm font-semibold text-slate-700 mb-1">
-            General Preparation Notes <span className="text-xs text-slate-400 font-normal">(Optional)</span>
+          <label htmlFor="apt-notes" className="block text-xs font-bold text-main-text uppercase tracking-wider mb-1.5">
+            Preparation Notes <span className="text-secondary-text font-normal lowercase">(optional)</span>
           </label>
           <textarea
             id="apt-notes"
             rows={3}
             value={formData.notes}
             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-            placeholder="e.g., Fasting 8 hours before appointment, bring insurance card and prior scans"
-            className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-slate-900 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm transition-all resize-none"
+            placeholder="e.g., Fast 8 hours prior, bring current medication list and insurance card"
+            className="w-full px-4 py-2.5 rounded-2xl border border-border text-main-text placeholder-secondary-text/60 focus:ring-2 focus:ring-primary focus:border-primary text-xs transition-all resize-none bg-surface hover:border-sage-300"
           />
         </div>
 
-        <div className="flex justify-end space-x-3 pt-3 border-t border-slate-100">
+        <div className="flex justify-end space-x-2 pt-4 border-t border-border">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors"
+            className="px-5 py-2.5 text-xs font-semibold text-main-text bg-surface border border-border rounded-2xl hover:bg-sage-50 transition-colors cursor-pointer"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-5 py-2 text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors disabled:opacity-50"
+            className="px-6 py-2.5 text-xs font-bold text-white bg-gradient-to-r from-[#7FD38C] to-[#43B574] hover:from-[#72CA80] hover:to-[#3BA367] rounded-2xl shadow-floating focus:outline-none focus:ring-2 focus:ring-primary transition-all disabled:opacity-50 cursor-pointer"
           >
             {isSubmitting ? 'Saving...' : initialData ? 'Save Changes' : 'Create Appointment'}
           </button>

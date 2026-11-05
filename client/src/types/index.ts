@@ -85,3 +85,4 @@ export interface ApiErrorResponse {
     details?: Array<{ field: string; message: string }>;
   };
 }
+

@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('../src/app');
 const { setupTestDB, teardownTestDB, clearTestDB } = require('./setup');
+const { generateToken } = require('../src/modules/auth/auth.controller');
 
 let userAToken;
 let userBToken;
@@ -23,7 +24,7 @@ beforeEach(async () => {
     email: 'userA@example.com',
     password: 'Password123!',
   });
-  userAToken = resA.body.token;
+  userAToken = generateToken(resA.body.user);
 
   // Create User B
   const resB = await request(app).post('/api/v1/auth/register').send({
@@ -31,7 +32,7 @@ beforeEach(async () => {
     email: 'userB@example.com',
     password: 'Password123!',
   });
-  userBToken = resB.body.token;
+  userBToken = generateToken(resB.body.user);
 
   // User A creates an appointment with question, medication, and follow-up
   const aptRes = await request(app)
@@ -145,3 +146,4 @@ describe('Security & Multi-Tenant Isolation Tests (FR-01)', () => {
     expect(res.body.error.code).toBe('VALIDATION_ERROR');
   });
 });
+

@@ -38,28 +38,28 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/40 backdrop-blur-xs flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
     >
       <div
         ref={modalRef}
-        className={`bg-white rounded-xl shadow-xl w-full ${maxWidth} overflow-hidden transform transition-all border border-slate-200 animate-in fade-in zoom-in-95 duration-150`}
+        className={`bg-surface rounded-3xl shadow-elevated w-full ${maxWidth} overflow-hidden transform transition-all border border-border animate-in fade-in zoom-in-95 duration-150`}
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
-          <h2 id="modal-title" className="text-lg font-semibold text-slate-900">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-border bg-sage-50/50">
+          <h2 id="modal-title" className="text-base font-bold text-main-text tracking-tight">
             {title}
           </h2>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition-colors focus-visible:ring-2 focus-visible:ring-brand-500"
+            className="text-secondary-text hover:text-main-text p-2 rounded-full hover:bg-sage-100 transition-colors cursor-pointer"
             aria-label="Close dialog"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
-        <div className="p-6">{children}</div>
+        <div className="p-6 sm:p-7">{children}</div>
       </div>
     </div>
   );

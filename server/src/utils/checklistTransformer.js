@@ -105,3 +105,4 @@ function transformToChecklist(appointment) {
 module.exports = {
   transformToChecklist,
 };
+

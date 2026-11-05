@@ -1,10 +1,16 @@
 const jwt = require('jsonwebtoken');
 const env = require('../config/env');
+const { AUTH_COOKIE_NAME } = require('../utils/cookies');
 
 function requireAuth(req, res, next) {
   let token = null;
 
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
+  // 1. Prefer HttpOnly session cookie
+  if (req.cookies && req.cookies[AUTH_COOKIE_NAME]) {
+    token = req.cookies[AUTH_COOKIE_NAME];
+  }
+  // 2. Fallback to Authorization: Bearer <token> for non-browser/test clients
+  else if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
     token = req.headers.authorization.split(' ')[1];
   }
 
@@ -29,7 +35,7 @@ function requireAuth(req, res, next) {
     return res.status(401).json({
       error: {
         code: 'UNAUTHORIZED',
-        message: 'Invalid or expired session token. Please sign in again.',
+        message: 'Invalid or expired session. Please sign in again.',
       },
     });
   }

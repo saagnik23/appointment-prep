@@ -7,43 +7,43 @@ export const Navbar: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     navigate('/login');
   };
 
   return (
-    <header className="no-print bg-white border-b border-slate-200 sticky top-0 z-30">
+    <header className="no-print bg-surface border-b border-border sticky top-0 z-30 shadow-subtle">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link
           to="/"
-          className="flex items-center space-x-3 text-brand-700 hover:text-brand-800 transition-colors focus-visible:rounded"
+          className="flex items-center space-x-3 text-primary hover:text-primary-hover transition-colors focus-visible:rounded"
         >
-          <div className="bg-brand-50 p-2 rounded-lg text-brand-600 border border-brand-100">
-            <ClipboardList className="w-6 h-6" />
+          <div className="bg-primary-soft p-2 rounded-lg text-primary border border-border">
+            <ClipboardList className="w-5 h-5" />
           </div>
           <div>
-            <span className="font-bold text-lg tracking-tight text-slate-900 block leading-tight">
+            <span className="font-bold text-base tracking-tight text-main-text block leading-tight">
               Appointment Prep
             </span>
-            <span className="text-xs text-slate-500 font-medium hidden sm:block">
+            <span className="text-xs text-secondary-text font-medium hidden sm:block">
               Private Medical Visit Organizer
             </span>
           </div>
         </Link>
 
         {isAuthenticated && (
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-sm text-slate-700 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">
-              <UserIcon className="w-4 h-4 text-slate-500" />
-              <span className="font-medium max-w-[140px] truncate">{user?.name}</span>
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 text-xs font-medium text-main-text bg-app px-3 py-1.5 rounded-lg border border-border">
+              <UserIcon className="w-3.5 h-3.5 text-secondary-text" />
+              <span className="max-w-[140px] truncate">{user?.name}</span>
             </div>
             <button
               onClick={handleLogout}
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium text-secondary-text hover:text-error hover:bg-error-soft rounded-lg transition-colors cursor-pointer"
               title="Sign out of your account"
             >
-              <LogOut className="w-4 h-4" />
+              <LogOut className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Sign Out</span>
             </button>
           </div>

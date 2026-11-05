@@ -15,8 +15,8 @@ beforeEach(async () => {
 });
 
 describe('End-to-End User Journey (Section 10 Acceptance Test)', () => {
-  it('executes the full patient journey end-to-end with synthetic test data', async () => {
-    // 1. Authenticate (Register User 1)
+  it('executes the full patient journey end-to-end with cookies, CSRF, and synthetic test data', async () => {
+    // 1. Authenticate (Register User 1 with HttpOnly session cookie)
     const registerRes = await request(app)
       .post('/api/v1/auth/register')
       .send({
@@ -25,12 +25,17 @@ describe('End-to-End User Journey (Section 10 Acceptance Test)', () => {
         password: 'Password999!',
       });
     expect(registerRes.status).toBe(201);
-    const token = registerRes.body.token;
+    expect(registerRes.body).not.toHaveProperty('token');
+    const userCookies = registerRes.headers['set-cookie'];
+    const csrfToken = registerRes.body.csrfToken;
+    expect(userCookies).toBeDefined();
+    expect(csrfToken).toBeDefined();
 
     // 2. Create appointment
     const aptRes = await request(app)
       .post('/api/v1/appointments')
-      .set('Authorization', `Bearer ${token}`)
+      .set('Cookie', userCookies)
+      .set('X-XSRF-TOKEN', csrfToken)
       .send({
         title: 'Endocrine Specialty Consult',
         providerName: 'Dr. Evelyn Reed',
@@ -45,7 +50,8 @@ describe('End-to-End User Journey (Section 10 Acceptance Test)', () => {
     // 3. Add a question
     const qRes = await request(app)
       .post(`/api/v1/appointments/${appointmentId}/questions`)
-      .set('Authorization', `Bearer ${token}`)
+      .set('Cookie', userCookies)
+      .set('X-XSRF-TOKEN', csrfToken)
       .send({
         text: 'Are there dietary supplements that interfere with thyroid absorption?',
         order: 0,
@@ -56,7 +62,8 @@ describe('End-to-End User Journey (Section 10 Acceptance Test)', () => {
     // 4. Add a medication entry
     const medRes = await request(app)
       .post(`/api/v1/appointments/${appointmentId}/medications`)
-      .set('Authorization', `Bearer ${token}`)
+      .set('Cookie', userCookies)
+      .set('X-XSRF-TOKEN', csrfToken)
       .send({
         name: 'Levothyroxine',
         dose: '50 mcg',
@@ -70,7 +77,8 @@ describe('End-to-End User Journey (Section 10 Acceptance Test)', () => {
     // 5. Add a follow-up action
     const followUpRes = await request(app)
       .post(`/api/v1/appointments/${appointmentId}/follow-ups`)
-      .set('Authorization', `Bearer ${token}`)
+      .set('Cookie', userCookies)
+      .set('X-XSRF-TOKEN', csrfToken)
       .send({
         text: 'Obtain morning fasting TSH blood draw',
         dueAt: '2027-01-15T00:00:00.000Z',
@@ -81,7 +89,7 @@ describe('End-to-End User Journey (Section 10 Acceptance Test)', () => {
     // 6. Generate the checklist
     const checklistRes = await request(app)
       .get(`/api/v1/appointments/${appointmentId}/checklist`)
-      .set('Authorization', `Bearer ${token}`);
+      .set('Cookie', userCookies);
     expect(checklistRes.status).toBe(200);
 
     // 7. Verify all details
@@ -100,7 +108,8 @@ describe('End-to-End User Journey (Section 10 Acceptance Test)', () => {
     // 8. Edit an item (update medication dose)
     const updateMedRes = await request(app)
       .patch(`/api/v1/appointments/${appointmentId}/medications/${medicationId}`)
-      .set('Authorization', `Bearer ${token}`)
+      .set('Cookie', userCookies)
+      .set('X-XSRF-TOKEN', csrfToken)
       .send({
         dose: '75 mcg',
       });
@@ -109,19 +118,20 @@ describe('End-to-End User Journey (Section 10 Acceptance Test)', () => {
     // 9. Verify the updated value in checklist
     const updatedChecklistRes = await request(app)
       .get(`/api/v1/appointments/${appointmentId}/checklist`)
-      .set('Authorization', `Bearer ${token}`);
+      .set('Cookie', userCookies);
     expect(updatedChecklistRes.body.sections[1].items[0].dose).toBe('75 mcg');
 
     // 10. Delete an item (delete question)
     const deleteQRes = await request(app)
       .delete(`/api/v1/appointments/${appointmentId}/questions/${questionId}`)
-      .set('Authorization', `Bearer ${token}`);
+      .set('Cookie', userCookies)
+      .set('X-XSRF-TOKEN', csrfToken);
     expect(deleteQRes.status).toBe(200);
 
     // 11. Verify it disappears
     const checklistAfterDelete = await request(app)
       .get(`/api/v1/appointments/${appointmentId}/checklist`)
-      .set('Authorization', `Bearer ${token}`);
+      .set('Cookie', userCookies);
     expect(checklistAfterDelete.body.sections[0].items).toHaveLength(0);
 
     // 12. Confirm another user cannot access this appointment
@@ -132,16 +142,16 @@ describe('End-to-End User Journey (Section 10 Acceptance Test)', () => {
         email: 'another.patient@example.com',
         password: 'Password999!',
       });
-    const anotherUserToken = anotherUserRes.body.token;
+    const anotherUserCookies = anotherUserRes.headers['set-cookie'];
 
     const crossUserGet = await request(app)
       .get(`/api/v1/appointments/${appointmentId}`)
-      .set('Authorization', `Bearer ${anotherUserToken}`);
+      .set('Cookie', anotherUserCookies);
     expect(crossUserGet.status).toBe(404);
 
     const crossUserChecklist = await request(app)
       .get(`/api/v1/appointments/${appointmentId}/checklist`)
-      .set('Authorization', `Bearer ${anotherUserToken}`);
+      .set('Cookie', anotherUserCookies);
     expect(crossUserChecklist.status).toBe(404);
   });
 });

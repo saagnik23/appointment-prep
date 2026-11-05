@@ -7,9 +7,9 @@ import { api } from '../services/api';
 
 vi.mock('../services/api', () => ({
   api: {
-    getToken: vi.fn(() => null),
-    setToken: vi.fn(),
+    getMe: vi.fn().mockRejectedValue(new Error('unauthorized')),
     login: vi.fn(),
+    logout: vi.fn(),
   },
 }));
 
@@ -53,7 +53,7 @@ describe('LoginPage Component', () => {
   it('calls api.login with email and password upon valid submission', async () => {
     (api.login as any).mockResolvedValue({
       user: { id: 'u1', name: 'Jane Doe', email: 'jane@example.com' },
-      token: 'mock-jwt-token',
+      csrfToken: 'mock-csrf-token',
     });
 
     render(

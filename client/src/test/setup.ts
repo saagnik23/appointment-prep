@@ -4,3 +4,4 @@ import '@testing-library/jest-dom';
 if (typeof window.print !== 'function') {
   window.print = () => {};
 }
+

@@ -191,3 +191,4 @@ appointmentSchema.methods.toJSON = function () {
 const Appointment = mongoose.model('Appointment', appointmentSchema);
 
 module.exports = Appointment;
+

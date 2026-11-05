@@ -26,20 +26,20 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={title} maxWidth="max-w-md">
       <div className="space-y-4">
-        <div className="flex items-start space-x-3 text-slate-700">
+        <div className="flex items-start space-x-3 text-main-text">
           {isDestructive && (
-            <div className="p-2 rounded-full bg-red-50 text-red-600 flex-shrink-0">
+            <div className="p-2 rounded-lg bg-error-soft text-error border border-error-border flex-shrink-0">
               <AlertTriangle className="w-5 h-5" />
             </div>
           )}
-          <p className="text-sm leading-relaxed text-slate-600">{message}</p>
+          <p className="text-sm leading-relaxed text-secondary-text">{message}</p>
         </div>
 
-        <div className="flex justify-end space-x-3 pt-3 border-t border-slate-100">
+        <div className="flex justify-end space-x-2 pt-3 border-t border-border">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors focus-visible:ring-2 focus-visible:ring-brand-500"
+            className="px-5 py-2.5 text-xs font-semibold text-main-text bg-surface border border-border rounded-2xl hover:bg-sage-50 transition-colors cursor-pointer"
           >
             {cancelLabel}
           </button>
@@ -49,10 +49,10 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
               onConfirm();
               onClose();
             }}
-            className={`px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors focus-visible:ring-2 ${
+            className={`px-5 py-2.5 text-xs font-bold text-white rounded-2xl transition-all shadow-subtle cursor-pointer ${
               isDestructive
-                ? 'bg-red-600 hover:bg-red-700 focus-visible:ring-red-500'
-                : 'bg-brand-600 hover:bg-brand-700 focus-visible:ring-brand-500'
+                ? 'bg-error hover:bg-error-hover focus-visible:ring-error'
+                : 'bg-gradient-to-r from-[#7FD38C] to-[#43B574] hover:from-[#72CA80] hover:to-[#3BA367]'
             }`}
           >
             {confirmLabel}

@@ -1,20 +1,30 @@
 # Codebase Audit: Appointment Prep
 
-**Audit Date:** November 5, 2026  
-**Auditor:** Principal Software Architect & Full-Stack Lead  
+**Initial Audit Date:** November 5, 2026  
+**Hardening & Verification Audit Date:** November 6, 2026  
+**Auditor:** Principal Software Architect & Application Security Lead  
 **Repository Path:** `/Users/saagnikdey/backendcia2`  
-**Status:** Greenfield / Empty Workspace  
+**Status:** Stabilised, Hardened & Production Ready  
 
 ---
 
-## 1. Executive Summary
+## 1. Executive Summary & Historical Baseline
 
-An exhaustive inspection of `/Users/saagnikdey/backendcia2` was performed per the reverse-engineering workflow defined in Section 11 of the Appointment Prep prompt. The repository was found to be an empty directory with no existing source code, package manifests, or Git history.
+### 1.1 Initial Greenfield Baseline (Phase 0)
+Per the reverse-engineering protocol in Section 11 of the original mandate, an exhaustive inspection of `/Users/saagnikdey/backendcia2` was performed at initialization. The repository was initially an empty workspace with no prior code or version control history. A complete application was subsequently scaffolded with full feature slices across the backend and frontend.
 
-Per the specification:
-> *"If the repository is empty, document that and scaffold a minimal maintainable application."*
-
-This audit records the baseline operating environment, technology versions, architectural boundaries, risk assessment, and the repository-specific implementation roadmap conforming strictly to the Functional Requirements (FR-01 through FR-07), Non-Goals, and Quality Standards.
+### 1.2 Current State Audit (Phase 7 Verification)
+A fresh, independent verification was performed on the active codebase. All 10 core functional areas are fully implemented, verified, and operational:
+1. Registration, login, logout, and current-user profile endpoints.
+2. Appointment CRUD and owner-scoped multi-tenant retrieval.
+3. Question organizer (user's own words, asked status, reordering, deletion).
+4. Self-reported medication list (name, dose, frequency, notes) preserved verbatim without clinical inference.
+5. Follow-up action tracker (action text, target due date, completion status).
+6. Deterministic checklist transformation with doctor visit notes area and clinical disclaimer.
+7. Checklist preview and browser print / Save as PDF flow (`@media print` stylesheet).
+8. Responsive React screens with accessible WCAG 2.2 AA focus indicators.
+9. 59 backend tests (13 suites) covering authentication, appointment lifecycle, items, checklist, CORS, error handling, readiness, query validation, and E2E patient journey.
+10. 5 frontend tests (2 suites) covering checklist rendering, printing, and login form accessibility.
 
 ---
 
@@ -26,58 +36,21 @@ This audit records the baseline operating environment, technology versions, arch
 | Runtime | Node.js | v25.9.0 | Verified |
 | Package Manager | npm | 11.12.1 | Verified |
 | Database Engine | MongoDB | v8.2.7 (`/opt/homebrew/bin/mongod`) | Verified |
-| Git VCS | Git | Initialized (`git init`) | Verified |
+| Test Runner (Server) | Jest | 29.7.0 with `mongodb-memory-server` | Verified |
+| Test Runner (Client) | Vitest | 2.1.9 with `@testing-library/react` | Verified |
+| Git VCS | Git | `main` branch, clean history | Verified |
 
 ---
 
-## 3. Findings from Initial Inspection
+## 3. Security Hardening Findings & Remediation Status
 
-1. **Existing Architecture:** None. No legacy technical debt, obsolete dependencies, or conflicting conventions exist.
-2. **Package Manifests & Lockfiles:** None present.
-3. **Frontend Configuration:** Empty. We will establish a clean, modern React frontend using Vite with TypeScript, Tailwind CSS / clean responsive CSS, accessible semantic markup (WCAG 2.2 AA compliant), and Vitest + React Testing Library.
-4. **Backend Architecture:** Empty. We will establish a modular Node.js + Express REST API (`/api/v1`) with Mongoose ODM, express-validator / Zod validation, JWT/cookie authentication with bcrypt password hashing, helmet security headers, rate limiting, and centralized error handling.
-5. **Database Configuration:** Empty. Mongoose schemas will implement embedded bounded arrays for questions, medications, and follow-ups with compound indexes (`{ ownerId: 1, scheduledAt: -1 }`), strict ownership isolation (`{ _id: appointmentId, ownerId }`), and sanitization.
-6. **Existing Tests & Linters:** None. We will set up automated tests covering unit, API integration (using `supertest` with in-memory or local MongoDB), and frontend component testing.
-7. **Git Status:** Clean initialized repository.
-
----
-
-## 4. Security & Privacy Audit Findings
-
-Because Appointment Prep handles sensitive personal information (appointments, questions, and medication lists entered by users):
-- **Access Control:** No unauthenticated public endpoints for private records. All appointments and child items must enforce server-side ownership authorization (`req.user.id`).
-- **Data Boundaries (Non-Goals):** Strict adherence to non-goals. The system must NEVER provide clinical advice, medical triage, dosage calculation, drug interactions, or AI-generated recommendations.
-- **Data Minimization:** Passwords must be hashed using `bcrypt` (cost factor >= 10). Sensitive medication or appointment payloads must never be logged to console/logs.
-- **Deterministic Checklist:** The checklist generation must be a pure, deterministic transformation of user-supplied data without hallucinated medical recommendations.
-- **Deletion Integrity:** Deleting an appointment must atomically delete all associated questions, medications, and follow-up items.
-
----
-
-## 5. Implementation Roadmap (Phases 0 to 6)
-
-- **Phase 0 — Discovery & Baseline:** Audit documented, architecture defined, decisions logged. *(Gate A achieved)*
-- **Phase 1 — Foundation & Core Scaffolding:** 
-  - Directory structure (`server/` and `client/`).
-  - Server configuration, MongoDB connection, Express app, error middleware, auth module (registration, login, JWT/cookie, auth middleware).
-  - Environment configuration (`.env.example`).
-  - Unit/integration tests for authentication. *(Gate B achieved)*
-- **Phase 2 — Appointment Lifecycle:**
-  - Appointment model with embedded arrays and indexes.
-  - Appointment CRUD controllers, services, validators, and tests.
-  - Client dashboard, appointment creation/edit forms, responsive layout.
-- **Phase 3 — Preparation Data (Questions, Medications, Follow-ups):**
-  - Question CRUD & reordering & asked/not_asked status.
-  - Medication CRUD preserving exact user-entered details (name, dose, frequency, notes).
-  - Follow-up CRUD (action text, optional due date, pending/completed status).
-  - Comprehensive API and UI tests. *(Gate C & Gate D)*
-- **Phase 4 — Checklist Generation & Print View:**
-  - Deterministic transformation service (`GET /api/v1/appointments/:appointmentId/checklist`).
-  - Checklist UI with print stylesheet (`@media print`), blank notes area for appointment, browser Save as PDF support.
-- **Phase 5 — Hardening & Security Testing:**
-  - Cross-user data isolation tests (verifying User B cannot read or mutate User A's appointments or items).
-  - Negative validation tests (malformed IDs, missing fields, invalid dates/enums).
-  - Accessibility (WCAG 2.2 AA keyboard navigation, aria labels, focus states).
-- **Phase 6 — Release Readiness:**
-  - Full automated test suite execution (backend + frontend).
-  - Production build verification (`npm run build`).
-  - Documentation finalization (`PRD.md`, `TRD.md`, `ARCHITECTURE.md`, `API.md`, `DECISIONS.md`, `WORKLOG.md`, `TEST_REPORT.md`, `README.md`). *(Gate E & Gate F achieved)*
+| Item | Area | Initial Defect | Remediation Status |
+|---|---|---|---|
+| **P0** | CORS Policy | Callback ended unconditionally in `true`, effectively allowing any rogue origin | **RESOLVED:** Strict allowlist with credential checks and origin rejection |
+| **P0** | Secret Fallback | Predictable default JWT secret in configuration | **RESOLVED:** Fail-fast in production for missing/placeholder/short secrets |
+| **P0** | Error Masking | Internal 5xx error messages and stack traces returned to clients | **RESOLVED:** Safe generic 5xx messages in production; Mongoose errors mapped to 400/409 |
+| **P1** | Session Storage | Bearer token persisted in browser `localStorage` | **RESOLVED:** Migrated to `HttpOnly` cookie with double-submit CSRF protection |
+| **P1** | Auth Rate Limit | General API limiter only; login and register vulnerable to brute force | **RESOLVED:** Configurable route-specific auth rate limiter returning 429 |
+| **P1** | Lifecycle & Readiness | Lacked `/ready` probe and graceful shutdown connection draining | **RESOLVED:** Added `/ready` probe and bounded idempotent shutdown |
+| **P2** | Query Validation | Unsupported `status` values silently ignored | **RESOLVED:** Express-validator query checks reject invalid filters with 400 |
+| **P2** | Build Workflow | `npm run build` ran `npm install` on every build | **RESOLVED:** Build script decoupled from dependency installation |

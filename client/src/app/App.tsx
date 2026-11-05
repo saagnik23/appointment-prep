@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from '../context/AuthContext';
-import { Navbar } from '../components/Navbar';
-import { Footer } from '../components/Footer';
+import { DashboardLayout } from '../components/DashboardLayout';
 import { LoginPage } from '../features/auth/LoginPage';
 import { RegisterPage } from '../features/auth/RegisterPage';
 import { AppointmentsListPage } from '../features/appointments/AppointmentsListPage';
@@ -16,10 +15,10 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="min-h-screen flex items-center justify-center bg-app">
         <div className="flex flex-col items-center space-y-3">
-          <div className="w-8 h-8 border-3 border-brand-600 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-xs text-slate-500 font-medium">Loading Appointment Prep...</p>
+          <div className="w-9 h-9 border-3 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-xs text-secondary-text font-medium">Loading Appointment Prep...</p>
         </div>
       </div>
     );
@@ -32,63 +31,78 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   return <>{children}</>;
 };
 
+const AuthenticatedWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [globalSearch, setGlobalSearch] = useState('');
+
+  return (
+    <DashboardLayout
+      searchQuery={globalSearch}
+      onSearchChange={setGlobalSearch}
+    >
+      {React.cloneElement(children as React.ReactElement, { searchQuery: globalSearch })}
+    </DashboardLayout>
+  );
+};
+
 const NotFoundPage: React.FC = () => {
   return (
-    <div className="max-w-md mx-auto my-20 p-8 bg-white rounded-2xl border border-slate-200 text-center shadow-sm">
-      <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center mx-auto mb-3">
-        <HelpCircle className="w-6 h-6" />
+    <div className="min-h-screen flex items-center justify-center bg-app p-4">
+      <div className="max-w-md w-full p-8 bg-surface rounded-3xl border border-border text-center shadow-card">
+        <div className="w-14 h-14 rounded-2xl bg-sage-50 text-primary flex items-center justify-center mx-auto mb-4 border border-sage-200">
+          <HelpCircle className="w-7 h-7" />
+        </div>
+        <h1 className="text-xl font-bold text-main-text mb-1">Page Not Found</h1>
+        <p className="text-xs text-secondary-text mb-6">The page you requested could not be found.</p>
+        <a
+          href="/"
+          className="inline-flex px-5 py-2.5 bg-gradient-to-r from-[#7FD38C] to-[#43B574] text-white text-xs font-bold rounded-2xl shadow-floating transition-all hover:-translate-y-0.5"
+        >
+          Return to Dashboard
+        </a>
       </div>
-      <h1 className="text-xl font-bold text-slate-900 mb-1">Page Not Found</h1>
-      <p className="text-sm text-slate-500 mb-6">The page you requested could not be found.</p>
-      <a
-        href="/"
-        className="inline-flex px-4 py-2 bg-brand-600 text-white text-sm font-semibold rounded-xl hover:bg-brand-700"
-      >
-        Go to Home
-      </a>
     </div>
   );
 };
 
 export const AppContent: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 font-sans text-slate-900">
-      <Navbar />
-      <main className="flex-1">
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <AppointmentsListPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/appointments/:id"
-            element={
-              <ProtectedRoute>
-                <AppointmentDetailPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/appointments/:id/checklist"
-            element={
-              <ProtectedRoute>
-                <ChecklistPreviewPage />
-              </ProtectedRoute>
-            }
-          />
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <AuthenticatedWrapper>
+              <AppointmentsListPage />
+            </AuthenticatedWrapper>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/appointments/:id"
+        element={
+          <ProtectedRoute>
+            <AuthenticatedWrapper>
+              <AppointmentDetailPage />
+            </AuthenticatedWrapper>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/appointments/:id/checklist"
+        element={
+          <ProtectedRoute>
+            <AuthenticatedWrapper>
+              <ChecklistPreviewPage />
+            </AuthenticatedWrapper>
+          </ProtectedRoute>
+        }
+      />
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 };
 
@@ -103,3 +117,4 @@ export const App: React.FC = () => {
 };
 
 export default App;
+

@@ -31,3 +31,4 @@
 - **FR-05 — Follow-up Actions:** Add, edit, delete, and toggle pending/completed status with optional due date.
 - **FR-06 — Checklist Generation:** Generate a structured, printable view containing appointment header, questions, medications, follow-up items, and a dedicated blank notes area for the appointment visit.
 - **FR-07 — Data Lifecycle & Cascade:** Full deletion of an appointment cascades atomically to all nested questions, medications, and follow-ups. Confirmation modals for destructive actions.
+

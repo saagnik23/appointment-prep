@@ -1,5 +1,5 @@
 const express = require('express');
-const { body, param } = require('express-validator');
+const { body, param, query } = require('express-validator');
 const appointmentsController = require('./appointments.controller');
 const itemsController = require('./items.controller');
 const checklistController = require('./checklist.controller');
@@ -16,7 +16,21 @@ const mongoIdParam = (name) =>
 
 /* ---------------- Appointments ---------------- */
 
-router.get('/', appointmentsController.listAppointments);
+router.get(
+  '/',
+  validate([
+    query('status')
+      .optional()
+      .isIn(['upcoming', 'completed', 'cancelled'])
+      .withMessage('Status query filter must be upcoming, completed, or cancelled'),
+    query('search')
+      .optional()
+      .trim()
+      .isLength({ max: 100 })
+      .withMessage('Search query parameter cannot exceed 100 characters'),
+  ]),
+  appointmentsController.listAppointments
+);
 
 router.post(
   '/',
@@ -289,3 +303,4 @@ router.delete(
 );
 
 module.exports = router;
+

@@ -3,14 +3,38 @@
 @tailwind utilities;
 
 @layer base {
-  /* Visible accessible focus states (WCAG 2.2 AA) */
+  body {
+    background-color: #F4F7F5;
+    color: #1B254B;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Accessible visible focus states (WCAG 2.2 AA) with soft sage-green ring */
   *:focus-visible {
-    outline: 2px solid #0c87eb;
+    outline: 2px solid #52B788;
     outline-offset: 2px;
   }
 }
 
-/* Print Stylesheet for Checklist Export & Browser Save as PDF (FR-06) */
+/* Custom soft scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #D2E5DA;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94BEA4;
+}
+
+/* Print Stylesheet for Checklist Export & Browser Save as PDF */
 @media print {
   body {
     background-color: #ffffff !important;
@@ -39,7 +63,6 @@
     page-break-before: always;
   }
 
-  /* Prevent awkward breaks inside items */
   .avoid-break {
     break-inside: avoid;
     page-break-inside: avoid;

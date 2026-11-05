@@ -9,39 +9,42 @@ import {
 
 const BASE_URL = '/api/v1';
 
+function getCookie(name: string): string | null {
+  if (typeof document === 'undefined') return null;
+  const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]+)'));
+  return match ? decodeURIComponent(match[2]) : null;
+}
+
 class ApiClient {
-  private token: string | null = null;
+  private inMemoryCsrfToken: string | null = null;
 
-  constructor() {
-    this.token = localStorage.getItem('appointment_prep_token');
+  public setCsrfToken(token: string | null) {
+    this.inMemoryCsrfToken = token;
   }
 
-  public setToken(token: string | null) {
-    this.token = token;
-    if (token) {
-      localStorage.setItem('appointment_prep_token', token);
-    } else {
-      localStorage.removeItem('appointment_prep_token');
-    }
-  }
-
-  public getToken(): string | null {
-    return this.token;
+  public getCsrfToken(): string | null {
+    return this.inMemoryCsrfToken || getCookie('XSRF-TOKEN');
   }
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+    const method = (options.method || 'GET').toUpperCase();
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       ...(options.headers as Record<string, string>),
     };
 
-    if (this.token) {
-      headers['Authorization'] = `Bearer ${this.token}`;
+    // Attach CSRF token on state-changing requests
+    if (['POST', 'PATCH', 'PUT', 'DELETE'].includes(method)) {
+      const csrfToken = this.getCsrfToken();
+      if (csrfToken) {
+        headers['X-XSRF-TOKEN'] = csrfToken;
+      }
     }
 
     const response = await fetch(`${BASE_URL}${endpoint}`, {
       ...options,
       headers,
+      credentials: 'include', // Ensures HttpOnly session cookies are transmitted
     });
 
     const data = await response.json().catch(() => null);
@@ -59,18 +62,34 @@ class ApiClient {
   }
 
   // Auth
-  async register(payload: { name: string; email: string; password: string }): Promise<{ user: User; token: string }> {
-    return this.request('/auth/register', {
+  async register(payload: { name: string; email: string; password: string }): Promise<{ user: User; csrfToken?: string }> {
+    const res = await this.request<{ user: User; csrfToken?: string }>('/auth/register', {
       method: 'POST',
       body: JSON.stringify(payload),
     });
+    if (res.csrfToken) {
+      this.setCsrfToken(res.csrfToken);
+    }
+    return res;
   }
 
-  async login(payload: { email: string; password: string }): Promise<{ user: User; token: string }> {
-    return this.request('/auth/login', {
+  async login(payload: { email: string; password: string }): Promise<{ user: User; csrfToken?: string }> {
+    const res = await this.request<{ user: User; csrfToken?: string }>('/auth/login', {
       method: 'POST',
       body: JSON.stringify(payload),
     });
+    if (res.csrfToken) {
+      this.setCsrfToken(res.csrfToken);
+    }
+    return res;
+  }
+
+  async logout(): Promise<{ message: string }> {
+    const res = await this.request<{ message: string }>('/auth/logout', {
+      method: 'POST',
+    });
+    this.setCsrfToken(null);
+    return res;
   }
 
   async getMe(): Promise<{ user: User }> {
@@ -193,6 +212,14 @@ class ApiClient {
   async deleteFollowUp(appointmentId: string, followUpId: string): Promise<{ message: string }> {
     return this.request(`/appointments/${appointmentId}/follow-ups/${followUpId}`, {
       method: 'DELETE',
+    });
+  }
+
+  // Assistant / Chatbot
+  async sendAssistantMessage(message: string): Promise<{ reply: string; suggestions?: string[] }> {
+    return this.request('/assistant/chat', {
+      method: 'POST',
+      body: JSON.stringify({ message }),
     });
   }
 }

@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('../src/app');
 const { setupTestDB, teardownTestDB, clearTestDB } = require('./setup');
+const { generateToken } = require('../src/modules/auth/auth.controller');
 
 let userToken;
 let userId;
@@ -20,7 +21,7 @@ beforeEach(async () => {
     email: 'owner@example.com',
     password: 'Password123!',
   });
-  userToken = res.body.token;
+  userToken = generateToken(res.body.user);
   userId = res.body.user.id;
 });
 
@@ -184,3 +185,4 @@ describe('Appointments API Endpoints', () => {
     });
   });
 });
+

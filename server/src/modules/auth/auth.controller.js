@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
 const env = require('../../config/env');
+const { setAuthCookies, clearAuthCookies } = require('../../utils/cookies');
 
 function generateToken(user) {
   return jwt.sign(
@@ -37,6 +38,7 @@ async function register(req, res, next) {
     });
 
     const token = generateToken(user);
+    const csrfToken = setAuthCookies(res, token);
 
     return res.status(201).json({
       user: {
@@ -44,7 +46,7 @@ async function register(req, res, next) {
         name: user.name,
         email: user.email,
       },
-      token,
+      csrfToken,
     });
   } catch (error) {
     next(error);
@@ -76,6 +78,7 @@ async function login(req, res, next) {
     }
 
     const token = generateToken(user);
+    const csrfToken = setAuthCookies(res, token);
 
     return res.status(200).json({
       user: {
@@ -83,7 +86,18 @@ async function login(req, res, next) {
         name: user.name,
         email: user.email,
       },
-      token,
+      csrfToken,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function logout(req, res, next) {
+  try {
+    clearAuthCookies(res);
+    return res.status(200).json({
+      message: 'Successfully signed out.',
     });
   } catch (error) {
     next(error);
@@ -117,5 +131,7 @@ async function getMe(req, res, next) {
 module.exports = {
   register,
   login,
+  logout,
   getMe,
+  generateToken,
 };

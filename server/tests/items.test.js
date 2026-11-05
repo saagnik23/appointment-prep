@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('../src/app');
 const { setupTestDB, teardownTestDB, clearTestDB } = require('./setup');
+const { generateToken } = require('../src/modules/auth/auth.controller');
 
 let userToken;
 let appointmentId;
@@ -20,7 +21,7 @@ beforeEach(async () => {
     email: 'prep@example.com',
     password: 'Password123!',
   });
-  userToken = authRes.body.token;
+  userToken = generateToken(authRes.body.user);
 
   const aptRes = await request(app)
     .post('/api/v1/appointments')
@@ -170,3 +171,4 @@ describe('Preparation Items (Questions, Medications, Follow-ups)', () => {
     });
   });
 });
+

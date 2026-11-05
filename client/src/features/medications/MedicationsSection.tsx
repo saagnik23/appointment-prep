@@ -108,16 +108,16 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <div className="bg-surface rounded-3xl border border-border p-6 sm:p-8 shadow-card">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <div className="flex items-center space-x-2">
-            <div className="p-2 bg-purple-50 text-purple-600 rounded-lg">
+          <div className="flex items-center space-x-2.5">
+            <div className="w-9 h-9 bg-sage-50 text-primary rounded-2xl flex items-center justify-center border border-sage-200">
               <Pill className="w-5 h-5" />
             </div>
-            <h2 className="text-lg font-bold text-slate-900">Medication List (Self-Reported)</h2>
+            <h2 className="text-lg font-bold text-main-text tracking-tight">Medication List (Self-Reported)</h2>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-secondary-text mt-1">
             Record current prescriptions, vitamins, or supplements you are taking so your doctor has an accurate picture.
           </p>
         </div>
@@ -125,7 +125,7 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
         {!isAdding && (
           <button
             onClick={openAddForm}
-            className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 text-xs font-semibold text-purple-700 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors cursor-pointer self-start sm:self-auto"
+            className="inline-flex items-center space-x-1.5 px-4 py-2 text-xs font-bold text-primary bg-sage-50 hover:bg-sage-100 rounded-2xl transition-all cursor-pointer self-start sm:self-auto border border-border shadow-subtle"
           >
             <Plus className="w-4 h-4" />
             <span>Add Medication</span>
@@ -134,7 +134,7 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
       </div>
 
       {error && (
-        <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center space-x-2">
+        <div className="mb-4 p-3.5 rounded-2xl bg-error-soft border border-error-border text-error text-xs flex items-center space-x-2">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           <span>{error}</span>
         </div>
@@ -144,18 +144,18 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
       {isAdding && (
         <form
           onSubmit={handleSubmit}
-          className="mb-6 p-5 rounded-xl bg-purple-50/50 border border-purple-200 space-y-4"
+          className="mb-6 p-6 rounded-3xl bg-sage-50/50 border border-border space-y-4"
         >
-          <div className="flex items-center justify-between border-b border-purple-100 pb-2">
-            <span className="text-xs font-bold text-purple-900 uppercase tracking-wider">
+          <div className="flex items-center justify-between border-b border-border pb-2.5">
+            <span className="text-xs font-bold text-main-text uppercase tracking-wider">
               {editingMedication ? 'Edit Medication' : 'Add Medication Entry'}
             </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="med-name" className="block text-xs font-semibold text-slate-700 mb-1">
-                Medication or Supplement Name <span className="text-red-500">*</span>
+              <label htmlFor="med-name" className="block text-xs font-bold text-main-text uppercase tracking-wider mb-1.5">
+                Medication or Supplement Name <span className="text-error">*</span>
               </label>
               <input
                 id="med-name"
@@ -164,13 +164,13 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
                 value={formName}
                 onChange={(e) => setFormName(e.target.value)}
                 placeholder="e.g., Metformin, Lisinopril, Vitamin D3"
-                className="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white"
+                className="w-full px-4 py-2.5 rounded-2xl border border-border text-sm focus:ring-2 focus:ring-primary focus:border-primary bg-surface text-main-text placeholder-secondary-text/60"
               />
             </div>
 
             <div>
-              <label htmlFor="med-dose" className="block text-xs font-semibold text-slate-700 mb-1">
-                Dose or Strength <span className="text-xs text-slate-400 font-normal">(Optional)</span>
+              <label htmlFor="med-dose" className="block text-xs font-bold text-main-text uppercase tracking-wider mb-1.5">
+                Dose or Strength <span className="text-xs text-secondary-text font-normal lowercase">(optional)</span>
               </label>
               <input
                 id="med-dose"
@@ -178,15 +178,15 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
                 value={formDose}
                 onChange={(e) => setFormDose(e.target.value)}
                 placeholder="e.g., 500 mg, 10 mcg, 1 tablet"
-                className="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white"
+                className="w-full px-4 py-2.5 rounded-2xl border border-border text-sm focus:ring-2 focus:ring-primary focus:border-primary bg-surface text-main-text placeholder-secondary-text/60"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="med-frequency" className="block text-xs font-semibold text-slate-700 mb-1">
-                Frequency or Schedule <span className="text-xs text-slate-400 font-normal">(Optional)</span>
+              <label htmlFor="med-frequency" className="block text-xs font-bold text-main-text uppercase tracking-wider mb-1.5">
+                Frequency or Schedule <span className="text-xs text-secondary-text font-normal lowercase">(optional)</span>
               </label>
               <input
                 id="med-frequency"
@@ -194,13 +194,13 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
                 value={formFrequency}
                 onChange={(e) => setFormFrequency(e.target.value)}
                 placeholder="e.g., Twice daily with meals, As needed"
-                className="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white"
+                className="w-full px-4 py-2.5 rounded-2xl border border-border text-sm focus:ring-2 focus:ring-primary focus:border-primary bg-surface text-main-text placeholder-secondary-text/60"
               />
             </div>
 
             <div>
-              <label htmlFor="med-notes" className="block text-xs font-semibold text-slate-700 mb-1">
-                Notes / Instructions <span className="text-xs text-slate-400 font-normal">(Optional)</span>
+              <label htmlFor="med-notes" className="block text-xs font-bold text-main-text uppercase tracking-wider mb-1.5">
+                Notes / Instructions <span className="text-xs text-secondary-text font-normal lowercase">(optional)</span>
               </label>
               <input
                 id="med-notes"
@@ -208,28 +208,28 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
                 value={formNotes}
                 onChange={(e) => setFormNotes(e.target.value)}
                 placeholder="e.g., Started 2 weeks ago, causes mild upset"
-                className="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white"
+                className="w-full px-4 py-2.5 rounded-2xl border border-border text-sm focus:ring-2 focus:ring-primary focus:border-primary bg-surface text-main-text placeholder-secondary-text/60"
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-between pt-2">
-            <span className="text-xs text-slate-500 flex items-center space-x-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-border">
+            <span className="text-xs text-secondary-text flex items-center space-x-1.5">
+              <ShieldCheck className="w-4 h-4 text-primary flex-shrink-0" />
               <span>Preserves exactly what you enter. Never modified automatically.</span>
             </span>
-            <div className="flex space-x-2">
+            <div className="flex items-center space-x-2 self-end sm:self-auto">
               <button
                 type="button"
                 onClick={closeForm}
-                className="px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-200 rounded-lg"
+                className="px-4 py-2 text-xs font-semibold text-secondary-text hover:bg-neutral-100 rounded-2xl transition-colors cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={!formName.trim()}
-                className="px-4 py-1.5 text-xs font-semibold text-white bg-purple-600 hover:bg-purple-700 rounded-lg disabled:opacity-50 cursor-pointer"
+                className="px-5 py-2 text-xs font-bold text-white bg-gradient-to-r from-[#7FD38C] to-[#43B574] hover:from-[#72CA80] hover:to-[#3BA367] rounded-2xl shadow-floating disabled:opacity-50 transition-all cursor-pointer"
               >
                 {editingMedication ? 'Update Medication' : 'Save Medication'}
               </button>
@@ -240,14 +240,14 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
 
       {/* Empty State */}
       {medications.length === 0 && !isAdding ? (
-        <div className="text-center py-10 px-4 border border-dashed border-slate-200 rounded-xl bg-slate-50/50">
-          <p className="text-sm font-medium text-slate-600 mb-1">No medications recorded</p>
-          <p className="text-xs text-slate-400 max-w-sm mx-auto mb-4">
+        <div className="text-center py-10 px-4 border border-dashed border-border rounded-xl bg-app/50">
+          <p className="text-sm font-medium text-main-text mb-1">No medications recorded</p>
+          <p className="text-xs text-secondary-text max-w-sm mx-auto mb-4">
             Listing your medications helps prevent unintentional double-prescriptions and gives your provider the full context.
           </p>
           <button
             onClick={openAddForm}
-            className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium text-purple-600 bg-white border border-purple-200 rounded-lg hover:bg-purple-50 cursor-pointer"
+            className="inline-flex items-center space-x-1.5 px-3.5 py-2 text-xs font-medium text-primary bg-white border border-border rounded-xl hover:bg-primary-soft/50 shadow-sm transition-colors cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add Medication Entry</span>
@@ -259,22 +259,22 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
           {medications.map((med) => (
             <div
               key={med.id}
-              className="p-4 rounded-xl border border-slate-200 bg-slate-50/40 hover:bg-white hover:border-slate-300 transition-all flex flex-col justify-between"
+              className="p-4 rounded-xl border border-border bg-white hover:border-primary/40 hover:shadow-sm transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-start justify-between gap-2 mb-1.5">
-                  <h3 className="text-sm font-bold text-slate-900">{med.name}</h3>
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <h3 className="text-sm font-bold text-main-text">{med.name}</h3>
                   <div className="flex items-center space-x-1 flex-shrink-0">
                     <button
                       onClick={() => openEditForm(med)}
-                      className="p-1 text-slate-400 hover:text-slate-700 cursor-pointer"
+                      className="p-1.5 text-secondary-text hover:text-main-text hover:bg-neutral-100 rounded-lg transition-colors cursor-pointer"
                       title="Edit medication"
                     >
                       <Edit2 className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => setDeletingId(med.id)}
-                      className="p-1 text-slate-400 hover:text-red-600 cursor-pointer"
+                      className="p-1.5 text-secondary-text hover:text-error hover:bg-error-soft rounded-lg transition-colors cursor-pointer"
                       title="Delete medication"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -282,20 +282,20 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
                   </div>
                 </div>
 
-                <div className="space-y-1 text-xs text-slate-600">
+                <div className="space-y-1.5 text-xs text-secondary-text">
                   {med.dose && (
                     <div>
-                      <span className="font-semibold text-slate-700">Dose:</span> {med.dose}
+                      <span className="font-semibold text-main-text">Dose:</span> {med.dose}
                     </div>
                   )}
                   {med.frequency && (
                     <div className="flex items-center space-x-1">
-                      <Clock className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                      <Clock className="w-3.5 h-3.5 text-secondary-text/80 flex-shrink-0" />
                       <span>{med.frequency}</span>
                     </div>
                   )}
                   {med.notes && (
-                    <div className="pt-1 text-slate-500 italic border-t border-slate-100 mt-1">
+                    <div className="pt-2 text-secondary-text italic border-t border-border mt-2">
                       "{med.notes}"
                     </div>
                   )}
@@ -318,3 +318,4 @@ export const MedicationsSection: React.FC<MedicationsSectionProps> = ({
     </div>
   );
 };
+
