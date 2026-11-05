@@ -33,3 +33,4 @@ services:
         value: 500
       - key: RATE_LIMIT_WINDOW_MS
         value: 900000
+
