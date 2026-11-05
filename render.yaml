@@ -1,0 +1,35 @@
+services:
+  # Appointment Prep Backend REST API Web Service
+  - type: web
+    name: appointment-prep-backend
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: server
+    buildCommand: npm ci
+    startCommand: node src/index.js
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: MONGODB_URI
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      - key: AUTH_RATE_LIMIT_MAX
+        value: 50
+      - key: AUTH_RATE_LIMIT_WINDOW_MS
+        value: 900000
+      - key: RATE_LIMIT_MAX
+        value: 500
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 900000
