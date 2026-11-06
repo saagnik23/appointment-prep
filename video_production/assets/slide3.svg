@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="s3bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7F9F6"/>
+      <stop offset="100%" stop-color="#E6EFE4"/>
+    </linearGradient>
+    <filter id="colShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#122B1E" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#s3bg)"/>
+
+  <!-- Top Banner -->
+  <g transform="translate(960, 110)" text-anchor="middle">
+    <rect x="-190" y="-22" width="380" height="44" rx="22" fill="#E2EBE0" stroke="#C8D9C5" stroke-width="1.5"/>
+    <text y="6" font-family="-apple-system, sans-serif" font-size="16" font-weight="700" fill="#2F6B50" letter-spacing="1.5">INTUITIVE 3-STEP WORKFLOW</text>
+    <text y="80" font-family="-apple-system, sans-serif" font-size="52" font-weight="800" fill="#13241B" letter-spacing="-1">Everything You Need Before You Walk In</text>
+  </g>
+
+  <!-- Step 1 Card -->
+  <g transform="translate(120, 270)" filter="url(#colShadow)">
+    <rect width="500" height="660" rx="24" fill="#FFFFFF" stroke="#E2EBE0" stroke-width="2"/>
+    <rect width="500" height="90" rx="24" fill="#2F6B50"/>
+    <text x="35" y="42" font-family="-apple-system, sans-serif" font-size="16" font-weight="700" fill="#7FD38C">STEP 1</text>
+    <text x="35" y="68" font-family="-apple-system, sans-serif" font-size="22" font-weight="800" fill="#FFFFFF">Prioritize Questions</text>
+
+    <g transform="translate(30, 130)">
+      <text x="0" y="0" font-family="-apple-system, sans-serif" font-size="16" fill="#476051">Record your exact questions in your own words.</text>
+      
+      <!-- Question item 1 -->
+      <g transform="translate(0, 30)">
+        <rect width="440" height="110" rx="14" fill="#F5F8F5" stroke="#D3E5D4"/>
+        <circle cx="28" cy="35" r="10" fill="#2F6B50"/>
+        <text x="28" y="40" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">1</text>
+        <text x="50" y="38" font-family="-apple-system, sans-serif" font-size="15" font-weight="700" fill="#13241B">What should I bring?</text>
+        <text x="50" y="65" font-family="-apple-system, sans-serif" font-size="13" fill="#666">Confirm recent lab summaries</text>
+        <rect x="50" y="78" width="80" height="20" rx="10" fill="#E8F4EC"/>
+        <text x="90" y="92" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#2F6B50">PRIORITY: HIGH</text>
+      </g>
+
+      <!-- Question item 2 -->
+      <g transform="translate(0, 160)">
+        <rect width="440" height="110" rx="14" fill="#F5F8F5" stroke="#D3E5D4"/>
+        <circle cx="28" cy="35" r="10" fill="#2F6B50"/>
+        <text x="28" y="40" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">2</text>
+        <text x="50" y="38" font-family="-apple-system, sans-serif" font-size="15" font-weight="700" fill="#13241B">Discuss energy levels</text>
+        <text x="50" y="65" font-family="-apple-system, sans-serif" font-size="13" fill="#666">Noticed afternoon fatigue past month</text>
+      </g>
+
+      <!-- Question item 3 -->
+      <g transform="translate(0, 290)">
+        <rect width="440" height="110" rx="14" fill="#F5F8F5" stroke="#D3E5D4"/>
+        <circle cx="28" cy="35" r="10" fill="#2F6B50"/>
+        <text x="28" y="40" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">3</text>
+        <text x="50" y="38" font-family="-apple-system, sans-serif" font-size="15" font-weight="700" fill="#13241B">Next steps clarification</text>
+        <text x="50" y="65" font-family="-apple-system, sans-serif" font-size="13" fill="#666">Review timeline for referral</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Step 2 Card -->
+  <g transform="translate(710, 270)" filter="url(#colShadow)">
+    <rect width="500" height="660" rx="24" fill="#FFFFFF" stroke="#E2EBE0" stroke-width="2"/>
+    <rect width="500" height="90" rx="24" fill="#2F6B50"/>
+    <text x="35" y="42" font-family="-apple-system, sans-serif" font-size="16" font-weight="700" fill="#7FD38C">STEP 2</text>
+    <text x="35" y="68" font-family="-apple-system, sans-serif" font-size="22" font-weight="800" fill="#FFFFFF">Log Medications Verbatim</text>
+
+    <g transform="translate(30, 130)">
+      <text x="0" y="0" font-family="-apple-system, sans-serif" font-size="16" fill="#476051">Self-reported regimen without automated alteration.</text>
+      
+      <g transform="translate(0, 30)">
+        <rect width="440" height="230" rx="14" fill="#F5F8F5" stroke="#D3E5D4"/>
+        <rect x="25" y="25" width="390" height="40" rx="8" fill="#FFFFFF" stroke="#CCDED0"/>
+        <text x="40" y="50" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#13241B">Example Medication A</text>
+
+        <rect x="25" y="80" width="185" height="40" rx="8" fill="#FFFFFF" stroke="#CCDED0"/>
+        <text x="40" y="105" font-family="-apple-system, sans-serif" font-size="14" fill="#13241B">Dose: 10 mg</text>
+
+        <rect x="230" y="80" width="185" height="40" rx="8" fill="#FFFFFF" stroke="#CCDED0"/>
+        <text x="245" y="105" font-family="-apple-system, sans-serif" font-size="14" fill="#13241B">Once daily</text>
+
+        <rect x="25" y="135" width="390" height="70" rx="8" fill="#FFFFFF" stroke="#CCDED0"/>
+        <text x="40" y="160" font-family="-apple-system, sans-serif" font-size="13" fill="#555">Patient Note: Taken with breakfast;</text>
+        <text x="40" y="180" font-family="-apple-system, sans-serif" font-size="13" fill="#555">no adverse effects observed.</text>
+      </g>
+
+      <g transform="translate(0, 290)">
+        <rect width="440" height="110" rx="14" fill="#FFFBF5" stroke="#EAD9BD"/>
+        <text x="20" y="35" font-family="-apple-system, sans-serif" font-size="15" font-weight="700" fill="#8C5C1E">🛡️ Strict Administrative Safety</text>
+        <text x="20" y="65" font-family="-apple-system, sans-serif" font-size="13" fill="#7A5623">Zero clinical dosages generated.</text>
+        <text x="20" y="85" font-family="-apple-system, sans-serif" font-size="13" fill="#7A5623">Stores only what you enter.</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Step 3 Card -->
+  <g transform="translate(1300, 270)" filter="url(#colShadow)">
+    <rect width="500" height="660" rx="24" fill="#FFFFFF" stroke="#E2EBE0" stroke-width="2"/>
+    <rect width="500" height="90" rx="24" fill="#2F6B50"/>
+    <text x="35" y="42" font-family="-apple-system, sans-serif" font-size="16" font-weight="700" fill="#7FD38C">STEP 3</text>
+    <text x="35" y="68" font-family="-apple-system, sans-serif" font-size="22" font-weight="800" fill="#FFFFFF">One-Click Clinical Checklist</text>
+
+    <g transform="translate(30, 130)">
+      <text x="0" y="0" font-family="-apple-system, sans-serif" font-size="16" fill="#476051">Compiled ready for the consultation room.</text>
+      
+      <g transform="translate(0, 30)">
+        <rect width="440" height="370" rx="14" fill="#FFFFFF" stroke="#CCDED0" filter="url(#colShadow)"/>
+        <rect width="440" height="50" rx="14" fill="#F4F8F4"/>
+        <text x="25" y="32" font-family="-apple-system, sans-serif" font-size="15" font-weight="800" fill="#13241B">CONSULTATION SUMMARY SHEET</text>
+
+        <text x="25" y="80" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#2F6B50">VISIT DETAILS</text>
+        <text x="25" y="100" font-family="-apple-system, sans-serif" font-size="13" fill="#333">Dr. Emily Carter • Greenfield Centre</text>
+
+        <text x="25" y="135" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#2F6B50">QUESTIONS (3)</text>
+        <text x="25" y="155" font-family="-apple-system, sans-serif" font-size="12" fill="#333">[ ] 1. What information to bring?</text>
+        <text x="25" y="175" font-family="-apple-system, sans-serif" font-size="12" fill="#333">[ ] 2. Discuss energy levels</text>
+        <text x="25" y="195" font-family="-apple-system, sans-serif" font-size="12" fill="#333">[ ] 3. Clarify follow-up timeline</text>
+
+        <text x="25" y="230" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#2F6B50">CURRENT MEDICATIONS</text>
+        <text x="25" y="250" font-family="-apple-system, sans-serif" font-size="12" fill="#333">• Example Med A (10mg once daily)</text>
+
+        <text x="25" y="285" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#2F6B50">FOLLOW-UP ACTIONS</text>
+        <text x="25" y="305" font-family="-apple-system, sans-serif" font-size="12" fill="#333">[ ] Schedule fasting bloodwork</text>
+
+        <rect x="25" y="325" width="390" height="28" rx="6" fill="#EAF3EC"/>
+        <text x="220" y="344" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" fill="#2F6B50">🖨️ Clean @media print Layout</text>
+      </g>
+    </g>
+  </g>
+</svg>

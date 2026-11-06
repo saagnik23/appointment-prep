@@ -1,0 +1,5 @@
+file '/Users/saagnikdey/backendcia2/video_production/assets/clip_beat1.mp4'
+file '/Users/saagnikdey/backendcia2/video_production/assets/clip_beat2.mp4'
+file '/Users/saagnikdey/backendcia2/video_production/assets/clip_beat3.mp4'
+file '/Users/saagnikdey/backendcia2/video_production/assets/clip_beat4.mp4'
+file '/Users/saagnikdey/backendcia2/video_production/assets/clip_beat5.mp4'

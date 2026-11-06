@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="s1bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12241B"/>
+      <stop offset="60%" stop-color="#183627"/>
+      <stop offset="100%" stop-color="#0E1A14"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#s1bg)"/>
+  <circle cx="960" cy="540" r="500" fill="#2F6B50" opacity="0.12" filter="blur(80px)"/>
+
+  <!-- Top Badge -->
+  <g transform="translate(960, 160)" text-anchor="middle">
+    <rect x="-160" y="-22" width="320" height="44" rx="22" fill="#203E2F" stroke="#36664F" stroke-width="1.5"/>
+    <text y="6" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="16" font-weight="700" fill="#7FD38C" letter-spacing="2">THE PROBLEM</text>
+  </g>
+
+  <!-- Big Hook Title -->
+  <text x="960" y="270" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="64" font-weight="800" fill="#FFFFFF" letter-spacing="-1.5">
+    Important Appointments. Scattered Preparation.
+  </text>
+  <text x="960" y="330" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="26" font-weight="400" fill="#9FB8A8">
+    When consultation time is limited to 15 minutes, forgotten questions become lost opportunities.
+  </text>
+
+  <!-- Scattered Note Cards -->
+  <g transform="translate(300, 430)">
+    <!-- Card 1: Notes App -->
+    <g transform="translate(0, 40) rotate(-4)" filter="url(#cardShadow)">
+      <rect width="360" height="260" rx="16" fill="#FDF6B8"/>
+      <rect x="24" y="24" width="60" height="10" rx="5" fill="#E3B341"/>
+      <text x="24" y="70" font-family="-apple-system, sans-serif" font-size="20" font-weight="700" fill="#6B5900">Notes App</text>
+      <text x="24" y="110" font-family="-apple-system, sans-serif" font-size="16" fill="#7D6A0E">• Ask about fatigue?</text>
+      <text x="24" y="140" font-family="-apple-system, sans-serif" font-size="16" fill="#7D6A0E">• What was dosage?</text>
+      <text x="24" y="170" font-family="-apple-system, sans-serif" font-size="16" fill="#7D6A0E">• Bring blood pressure log</text>
+      <rect x="24" y="200" width="180" height="28" rx="8" fill="#F5E48C"/>
+      <text x="36" y="220" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" fill="#8A6B0A">WHERE WAS THIS SAVED?</text>
+    </g>
+
+    <!-- Card 2: Calendar Fragment -->
+    <g transform="translate(480, 0) rotate(2)" filter="url(#cardShadow)">
+      <rect width="360" height="260" rx="16" fill="#FFFFFF"/>
+      <rect width="360" height="60" rx="16" fill="#EF5350"/>
+      <text x="30" y="40" font-family="-apple-system, sans-serif" font-size="22" font-weight="800" fill="#FFFFFF">Calendar Alert</text>
+      <text x="30" y="105" font-family="-apple-system, sans-serif" font-size="20" font-weight="700" fill="#13241B">10:30 AM Consultation</text>
+      <text x="30" y="135" font-family="-apple-system, sans-serif" font-size="15" fill="#718096">Dr. Carter (Clinic Room ???)</text>
+      <rect x="30" y="165" width="300" height="50" rx="10" fill="#FFF5F5" stroke="#FEB2B2"/>
+      <text x="45" y="196" font-family="-apple-system, sans-serif" font-size="14" font-weight="600" fill="#C53030">No preparation notes attached</text>
+    </g>
+
+    <!-- Card 3: Crumpled Receipt -->
+    <g transform="translate(960, 60) rotate(5)" filter="url(#cardShadow)">
+      <rect width="360" height="260" rx="16" fill="#F7FAFC"/>
+      <text x="25" y="50" font-family="-apple-system, sans-serif" font-size="18" font-weight="800" fill="#2D3748">Prescription Receipt</text>
+      <text x="25" y="90" font-family="-apple-system, sans-serif" font-size="14" fill="#4A5568">Rx: Example Med A</text>
+      <text x="25" y="120" font-family="-apple-system, sans-serif" font-size="14" fill="#4A5568">Instructions smeared...</text>
+      <rect x="25" y="160" width="310" height="40" rx="8" fill="#EDF2F7"/>
+      <text x="40" y="185" font-family="-apple-system, sans-serif" font-size="13" fill="#718096">Left in kitchen drawer</text>
+    </g>
+  </g>
+
+  <!-- Bottom Punchline -->
+  <g transform="translate(960, 890)" text-anchor="middle">
+    <rect x="-380" y="-30" width="760" height="60" rx="30" fill="#3D1D1D" stroke="#A83232" stroke-width="1.5"/>
+    <text y="8" font-family="-apple-system, sans-serif" font-size="22" font-weight="600" fill="#FFC9C9">Result: Rushed visits, forgotten questions, and post-appointment regret</text>
+  </g>
+</svg>
