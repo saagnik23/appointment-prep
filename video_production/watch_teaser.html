@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment Prep — 45s Product Launch Teaser Player</title>
+  <style>
+    :root {
+      --primary: #2F6B50;
+      --accent: #7FD38C;
+      --bg: #F7F8F5;
+      --text: #13241B;
+      --card-bg: #FFFFFF;
+      --border: #E2E8DF;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 960px;
+      width: 100%;
+    }
+    header {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: #E8F4EC;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 8px;
+    }
+    p.tagline {
+      color: #5A6F62;
+      font-size: 16px;
+      margin-top: 4px;
+    }
+    .video-wrapper {
+      position: relative;
+      background: #0D1912;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(18, 43, 30, 0.15);
+      border: 1px solid var(--border);
+    }
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+      outline: none;
+    }
+    .info-card {
+      margin-top: 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .info-meta h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .info-meta p {
+      font-size: 14px;
+      color: #627A6B;
+      margin-top: 4px;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+    }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #23543e;
+    }
+    .btn-secondary {
+      background: #EBF2EC;
+      color: var(--primary);
+      border: 1px solid #D1E3D4;
+    }
+    .btn-secondary:hover {
+      background: #DEEADE;
+    }
+    .beats-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+    }
+    .beat-pill {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 13px;
+    }
+    .beat-pill strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <div class="badge">
+          <span class="badge-dot"></span>
+          Official 45s Product Teaser
+        </div>
+        <h1>Appointment Prep</h1>
+        <p class="tagline">Prepare better. Remember what matters. Stay organised.</p>
+      </div>
+      <div>
+        <a class="btn btn-primary" href="https://backendcia2.vercel.app" target="_blank">Open Live App ↗</a>
+      </div>
+    </header>
+
+    <div class="video-wrapper">
+      <video controls autoplay muted playsinline poster="./thumbnail.png">
+        <source src="./AppointmentPrep_Teaser_45s.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="info-card">
+      <div class="info-meta">
+        <h3>AppointmentPrep_Teaser_45s.mp4</h3>
+        <p>1080p Full HD • 45 Seconds • H.264 AAC • Spoken British Narration (Daniel)</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-secondary" href="./AppointmentPrep_Teaser_45s.mp4" download="AppointmentPrep_Teaser_45s.mp4">
+          ⬇ Download MP4
+        </a>
+      </div>
+    </div>
+
+    <div class="beats-grid">
+      <div class="beat-pill">
+        <strong>Beat 1 (00:00 - 00:06)</strong>
+        The Problem: Scattered Notes &amp; Forgotten Questions
+      </div>
+      <div class="beat-pill">
+        <strong>Beat 2 (00:06 - 00:13)</strong>
+        The Reveal: Appointment Prep Private Workspace
+      </div>
+      <div class="beat-pill">
+        <strong>Beat 3 (00:13 - 00:26)</strong>
+        Workflow: Questions, Meds &amp; Checklist Generator
+      </div>
+      <div class="beat-pill">
+        <strong>Beat 4 (00:26 - 00:37)</strong>
+        Scope &amp; Privacy: Zero Clinical Diagnosis
+      </div>
+      <div class="beat-pill">
+        <strong>Beat 5 (00:37 - 00:45)</strong>
+        Outro &amp; CTA: Live at backendcia2.vercel.app
+      </div>
+    </div>
+  </div>
+</body>
+</html>
